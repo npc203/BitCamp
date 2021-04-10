@@ -1,26 +1,45 @@
 import speech_recognition as sr
 from bs4 import BeautifulSoup
-import time,os
+from utils import loadfile, savefile, getitem
 
-r = sr.Recognizer()
-mic = sr.Microphone()
 
-if data:= loadfile():
-    data = BeautifulSoup(data,features="html.parser")
-else:
-    with open("templates/base.html","r") as f:
-        data = BeautifulSoup(f.read(),features="html.parser")
 
-while True:
-    pass
-    
+def process_speech(speech,data):
+    for command in commands:
+        if command in speech:
+            commands[command](speech,command,data)
 
-def loadfile():
-    if os.path.exists("final.html"):
-        with open("final.html","r") as f:
-            return f.read()
-    
+commands = {
+    "save":savefile,
+    "add":getitem,
+    "create":getitem
+}
 
-def savefile(data):
-    with open("final.html","w+") as f:
-        f.write(str(data))
+
+def main_loop():
+
+    # load file
+    if data:= loadfile():
+        data = BeautifulSoup(data,features="html.parser")
+    else:
+        with open("templates/base.html","r") as f:
+            data = BeautifulSoup(f.read(),features="html.parser")
+
+    r = sr.Recognizer()
+    mic = sr.Microphone()
+
+    while True:
+        print("listening")
+        with mic as source:
+            r.adjust_for_ambient_noise(source)
+            audio = r.listen(source)
+        print("recognising")
+        speech = r.recognize_google(audio)
+        print("you said:",speech)
+        if "exit" == speech:
+            break
+        data = process_speech(speech,data)
+        
+        
+if __name__ == "__main__":
+    main_loop()

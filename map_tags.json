@@ -1,5 +1,6 @@
 {
     "button":"button",
     "heading":"h1",
-    "hyperlink":"a"
+    "hyperlink":"a",
+    "image":"img"
 }
