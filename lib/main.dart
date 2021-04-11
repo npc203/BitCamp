@@ -136,7 +136,7 @@ class LeftSide extends StatelessWidget {
                                   Navigator.of(context, rootNavigator: true)
                                       .pop(); // dismisses only the dialog and returns nothing
                                 },
-                                child: new Text('Create'),
+                                child: new Text('Create Project Folder', style: GoogleFonts.poppins(color: Color(0xFF5468E6), fontWeight: FontWeight.bold),),
                               ),
                             ],
                           ),
@@ -201,7 +201,7 @@ class LeftSide extends StatelessWidget {
                           context: context,
                           builder: (context) => new AlertDialog(
                             title: new Text(
-                              'Settings',
+                              'Change your preferences',
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold),
                             ),
@@ -265,7 +265,7 @@ class LeftSide extends StatelessWidget {
                                   Navigator.of(context, rootNavigator: true)
                                       .pop(); // dismisses only the dialog and returns nothing
                                 },
-                                child: new Text('Save'),
+                                child: new Text('Save',style: GoogleFonts.poppins(color: Color(0xFF5468E6), fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
@@ -289,7 +289,7 @@ class LeftSide extends StatelessWidget {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      "Settings",
+                                      "Preferences",
                                       style: GoogleFonts.poppins(),
                                     ),
                                   ]))),
