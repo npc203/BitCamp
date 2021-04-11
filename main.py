@@ -15,7 +15,9 @@ commands = {
     "add":getitem,
     "create":getitem,
     "background":bg,
-    "move":moveitem
+    "move":moveitem,
+    "response":resp
+
 }
 
 
@@ -28,7 +30,7 @@ def main_loop():
         with open("templates/base.html","r") as f:
             data = BeautifulSoup(f.read(),features="html.parser")
         with open("main.css","w") as f:
-            f.write("Sample css")
+            f.write("")
 
     while True:
 

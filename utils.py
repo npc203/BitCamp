@@ -76,8 +76,8 @@ def add_asset(speech,command,data):
             result = response["transcription"]
             print("you said",result)
             for img in items:
-                if img.startswith(result):
-                    tag = data.new_tag("img",src=f"assets/{img}")
+                if img.startswith("test"):
+                    tag = data.new_tag("img",src=f"assets/{img}",height="10%", width="10%")
                     data.append(tag)
                     if data:
                         data.body.append(tag)
@@ -88,9 +88,10 @@ def add_asset(speech,command,data):
     
 
 def moveitem(speech,command,data):
-    if "centre" in speech or "center" in speech:
-        data = center()
-        savecss(data)
+    # if "centre" in speech or "center" in speech:
+
+    data = center()
+    savecss(data)
 
 def bg(speech,command,data):
     try:
@@ -108,4 +109,7 @@ def db_make(speech,command,data):
 def savecss(data):
     with open("main.css","a") as f:
         f.write(str(data))
+
+def resp(speech,command,data):
+    speak("Bootstrap has already been added")
 
