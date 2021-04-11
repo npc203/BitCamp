@@ -42,6 +42,7 @@ def main_loop():
         else:
             print("Too many errors stopping")
 
+
         print("you said:",speech)
         if "exit" == speech:
             break
