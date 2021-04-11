@@ -6,7 +6,7 @@ from recognise import mic
 def process_speech(speech,data):
     for command in commands:
         if command in speech:
-            commands[command](speech,command,data)
+            return commands[command](speech,command,data)
 
 commands = {
     "save":savefile,
@@ -30,7 +30,7 @@ def main_loop():
             f.write("Sample css")
 
    
-
+    print(data)
     while True:
 
         # Getting text

@@ -7,6 +7,7 @@ from recognise import mic
 
 cache_dir = "templates/snippets/"
 tts = pyttsx3.init()
+tts.setProperty('rate', 125) 
 
 def speak(text):
     tts.say(text)
@@ -76,7 +77,7 @@ def add_asset(speech,command,data):
             print("you said",result)
             for img in items:
                 if img.startswith(result):
-                    tag = data.new_tag(tag_mapper[item],src=f"assets/{img}")
+                    tag = data.new_tag("img",src=f"assets/{img}")
                     data.append(tag)
                     if data:
                         data.body.append(tag)
