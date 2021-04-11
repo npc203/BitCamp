@@ -52,6 +52,7 @@ def getitem(speech,command,data):
             tag['class']  = class_ 
     except ValueError:
         pass
+    if data.body:
 
-    data.body.append(tag)
-    savefile(data)
+        data.body.append(tag)
+        savefile(data)
