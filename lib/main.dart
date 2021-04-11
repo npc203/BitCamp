@@ -4,8 +4,9 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:filepicker_windows/filepicker_windows.dart';
 import 'package:fswitch/fswitch.dart';
+import 'package:lottie/lottie.dart';
 
-void main() {
+void voice() {
   runApp(MyApp());
   doWhenWindowReady(() {
     final win = appWindow;
@@ -13,7 +14,19 @@ void main() {
     win.minSize = initialSize;
     win.size = initialSize;
     win.alignment = Alignment.center;
-    win.title = "Code pal";
+    win.title = "Dev pal";
+    win.show();
+  });
+}
+
+void main() {
+  runApp(Voice());
+  doWhenWindowReady(() {
+    final win = appWindow;
+    final initialSize = Size(300, 280);
+    win.minSize = initialSize;
+    win.size = initialSize;
+    win.alignment = Alignment.center;
     win.show();
   });
 }
@@ -30,6 +43,44 @@ class MyApp extends StatelessWidget {
                 color: borderColor,
                 width: 1,
                 child: Row(children: [LeftSide(), RightSide()]))));
+  }
+}
+
+
+
+class Voice extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Color(0xFF5468E6),
+         body: Container(
+           alignment: Alignment.center,
+                            color: Color(0xFF5468E6),
+
+           child: Column(
+             mainAxisAlignment: MainAxisAlignment.start,
+             children: [
+               Container(
+                 height: 150,
+                 width: 150,
+                 color: Color(0xFF5468E6),
+                 child: Column(
+                   children: [
+                     Lottie.asset("assets/ripple.json"),
+                   ],
+                 ),
+               ),
+               SizedBox(height: 30),
+               Text("Listening...", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white) ),
+               SizedBox(height: 10),
+                              Text("Changes appear live on browser", style: GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: 12, color: Colors.white) ),
+
+             ],
+           ),
+         ), 
+        ));
   }
 }
 
@@ -133,8 +184,7 @@ class LeftSide extends StatelessWidget {
                             actions: <Widget>[
                               new FlatButton(
                                 onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pop(); // dismisses only the dialog and returns nothing
+                                  voice();
                                 },
                                 child: new Text('Create Project Folder', style: GoogleFonts.poppins(color: Color(0xFF5468E6), fontWeight: FontWeight.bold),),
                               ),
@@ -477,3 +527,5 @@ class WindowButtons extends StatelessWidget {
     );
   }
 }
+
+
