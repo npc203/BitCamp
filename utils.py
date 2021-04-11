@@ -88,14 +88,15 @@ def add_asset(speech,command,data):
     
 
 def moveitem(speech,command,data):
-    if "center" in speech:
+    if "centre" in speech or "center" in speech:
         data = center()
         savecss(data)
 
 def bg(speech,command,data):
     try:
+        speech = speech.split()
         check_color = speech.index(command)
-        savecss(background_css([check_color+2]))
+        savecss(background_css(speech[check_color+2]))
     except ValueError:
         pass
 
