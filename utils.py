@@ -65,7 +65,7 @@ def getitem(speech,command,data):
     if data:
         data.body.append(tag)
         savefile(data)
-    speak(f"Sucessfully added {command} to the html")
+    speak(f"Sucessfully added to the html")
 
 def add_asset(speech,command,data):
     items = os.listdir("assets/")
@@ -100,6 +100,10 @@ def bg(speech,command,data):
     except ValueError:
         pass
 
+def db_make(speech,command,data):
+    with open("templates/base.php","r") as f:
+        with open("main.php","w") as fp:
+            fp.write(f.read())
 
 def savecss(data):
     with open("main.css","a") as f:

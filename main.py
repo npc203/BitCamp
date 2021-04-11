@@ -11,6 +11,7 @@ def process_speech(speech,data):
 commands = {
     "save":savefile,
     "image":add_asset,
+    "database":db_make,
     "add":getitem,
     "create":getitem,
     "background":bg,
@@ -29,8 +30,6 @@ def main_loop():
         with open("main.css","w") as f:
             f.write("Sample css")
 
-   
-    print(data)
     while True:
 
         # Getting text
@@ -42,11 +41,13 @@ def main_loop():
         else:
             print("Too many errors stopping")
 
-
         print("you said:",speech)
-        if "exit" == speech:
-            break
-        data = process_speech(speech,data)
+        if speech:
+            if "exit" == speech:
+                break
+            data = process_speech(speech,data)
+        else:
+            print("retry")
         
         
 if __name__ == "__main__":
