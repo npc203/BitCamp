@@ -1,7 +1,6 @@
-import speech_recognition as sr
 from bs4 import BeautifulSoup
-from utils import loadfile, savefile, getitem,moveitem
-
+from utils import *
+from recognise import mic
 
 
 def process_speech(speech,data):
@@ -11,8 +10,10 @@ def process_speech(speech,data):
 
 commands = {
     "save":savefile,
+    "image":add_asset,
     "add":getitem,
     "create":getitem,
+    "background":bg,
     "move":moveitem
 }
 
@@ -28,16 +29,19 @@ def main_loop():
         with open("main.css","w") as f:
             f.write("Sample css")
 
-    r = sr.Recognizer()
-    mic = sr.Microphone()
+   
 
     while True:
-        print("listening")
-        with mic as source:
-            r.adjust_for_ambient_noise(source)
-            audio = r.listen(source)
-        print("recognising")
-        speech = r.recognize_google(audio)
+
+        # Getting text
+        for i in range(3):
+            response = mic.recognize_speech()
+            if response["success"]:
+                speech = response["transcription"]
+                break
+        else:
+            print("Too many errors stopping")
+
         print("you said:",speech)
         if "exit" == speech:
             break

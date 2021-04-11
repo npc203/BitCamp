@@ -1,9 +1,16 @@
 import os
 import json
 from bs4 import BeautifulSoup
-from css_edits import center
+from css_edits import *
+import pyttsx3
+from recognise import mic
 
 cache_dir = "templates/snippets/"
+tts = pyttsx3.init()
+
+def speak(text):
+    tts.say(text)
+    tts.runAndWait()
 
 # tag mapper
 with open("map_tags.json","r") as f:
@@ -54,16 +61,45 @@ def getitem(speech,command,data):
     except ValueError:
         pass
 
-    if data.body:
+    if data:
         data.body.append(tag)
         savefile(data)
+    speak(f"Sucessfully added {command} to the html")
+
+def add_asset(speech,command,data):
+    items = os.listdir("assets/")
+    speak("Paste your assets into the assets folder and speak out the file name")
+    for i in range(3):
+        response = mic.recognize_speech()
+        if response["success"]:
+            result = response["transcription"]
+            print("you said",result)
+            for img in items:
+                if img.startswith(result):
+                    tag = data.new_tag(tag_mapper[item],src=f"assets/{img}")
+                    data.append(tag)
+                    if data:
+                        data.body.append(tag)
+                        savefile(data)
+                    return
+        else:
+            print("Retry...")
+    
 
 def moveitem(speech,command,data):
     if "center" in speech:
-        data += center
+        data = center()
         savecss(data)
 
+def bg(speech,command,data):
+    try:
+        check_color = speech.index(command)
+        savecss(background_css([check_color+2]))
+    except ValueError:
+        pass
+
+
 def savecss(data):
-    with open("main.css","w") as f:
+    with open("main.css","a") as f:
         f.write(str(data))
 
