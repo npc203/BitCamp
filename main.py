@@ -31,7 +31,7 @@ def main_loop():
     while True:
         print("listening")
         with mic as source:
-            r.adjust_for_ambient_noise(source)
+            # r.adjust_for_ambient_noise(source)
             audio = r.listen(source)
         print("recognising")
         speech = r.recognize_google(audio)
