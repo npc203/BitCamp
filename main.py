@@ -1,6 +1,6 @@
 import speech_recognition as sr
 from bs4 import BeautifulSoup
-from utils import loadfile, savefile, getitem
+from utils import loadfile, savefile, getitem,moveitem
 
 
 
@@ -12,7 +12,8 @@ def process_speech(speech,data):
 commands = {
     "save":savefile,
     "add":getitem,
-    "create":getitem
+    "create":getitem,
+    "move":moveitem
 }
 
 
@@ -24,6 +25,8 @@ def main_loop():
     else:
         with open("templates/base.html","r") as f:
             data = BeautifulSoup(f.read(),features="html.parser")
+        with open("main.css","w") as f:
+            f.write("Sample css")
 
     r = sr.Recognizer()
     mic = sr.Microphone()

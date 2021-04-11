@@ -1,4 +1,5 @@
 env/
 *.whl
 final.html
+main.css
 __pycache__/

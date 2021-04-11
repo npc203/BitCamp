@@ -1,6 +1,7 @@
 import os
 import json
 from bs4 import BeautifulSoup
+from css_edits import center
 
 cache_dir = "templates/snippets/"
 
@@ -52,7 +53,17 @@ def getitem(speech,command,data):
             tag['class']  = class_ 
     except ValueError:
         pass
-    if data.body:
 
+    if data.body:
         data.body.append(tag)
         savefile(data)
+
+def moveitem(speech,command,data):
+    if "center" in speech:
+        data += center
+        savecss(data)
+
+def savecss(data):
+    with open("main.css","w") as f:
+        f.write(str(data))
+
