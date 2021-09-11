@@ -3,4 +3,5 @@ env/
 final.html
 main.css
 main.php
+*.pyc
 __pycache__/

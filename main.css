@@ -1,9 +1,5 @@
-body {
-  background-color: yellow ;
-}body {
-  background-color: pink ;
-}.title{
-    position:absolute;
+.title{
+   position:absolute;
     margin-top:75px;
     left: 50%;
 }

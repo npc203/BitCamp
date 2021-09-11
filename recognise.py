@@ -1,10 +1,13 @@
 import speech_recognition as sr
 
+samplerate = 44100  # Hertz
+duration = 3  # seconds
+
+
 class Recognise:
     def __init__(self):
         self.r = sr.Recognizer()
         self.mic = sr.Microphone()
-
 
     # Credits to https://realpython.com/python-speech-recognition/
     def recognize_speech(self):
@@ -35,14 +38,10 @@ class Recognise:
         # from the microphone
         with microphone as source:
             # recognizer.adjust_for_ambient_noise(source)
-            audio = recognizer.listen(source)
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
 
         # set up the response object
-        response = {
-            "success": True,
-            "error": None,
-            "transcription": None
-        }
+        response = {"success": True, "error": None, "transcription": None}
 
         print("Recognising...")
         # try recognizing the speech in the recording
@@ -59,5 +58,6 @@ class Recognise:
             response["error"] = "Unable to recognize speech"
 
         return response
+
 
 mic = Recognise()
